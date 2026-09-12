@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>새사주 신축매입약정 사업지 스코어보드</title>
+<meta name="description" content="신축매입약정 사업지 4곳의 입지·사업성 종합 평가 스코어보드">
+<!-- Pretendard가 유일하게 실제 로드되는 웹폰트다(--font-display/--font-body가
+     항상 이를 먼저 선택). Inter는 tokens.css 폰트 스택의 문서화된 폴백일 뿐 이
+     페이지가 실제로 렌더에 쓰는 값이 아니므로, Google Fonts에서 Inter를 별도
+     로드하지 않는다(렌더 블로킹 웹폰트 요청 1건 절감 — plan.md 갭 분석 5번). -->
+<!-- Pretendard(한글 디스플레이/본문 서체) — Google Fonts에 없어 공식 배포 CDN에서 로드 -->
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css">
+<link rel="stylesheet" href="css/tokens.css">
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<nav class="site-nav top-nav" id="site-nav" aria-label="사업지 바로가기">
+  <div class="site-nav-inner">
+    <span class="site-nav-brand">새사주</span>
+    <ul class="site-nav-links" id="site-nav-links"></ul>
+  </div>
+</nav>
+
+<header class="hero" id="hero">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="hero-inner">
+    <p class="hero-eyebrow">SAESAJU · 신축매입약정 사업지 평가</p>
+    <h1 class="hero-title">신축매입약정 사업지 스코어보드</h1>
+    <p class="hero-sub">서울·인천 4개 사업지의 입지와 사업성을 한눈에 비교합니다</p>
+    <div class="hero-grades" id="hero-grades" aria-label="사업지별 종합 등급 요약"></div>
+  </div>
+  <div class="hero-scroll-cue" aria-hidden="true">
+    <span>Scroll</span>
+    <div class="hero-scroll-line"></div>
+  </div>
+</header>
+
+<main id="scenes-root" aria-label="사업지별 상세 정보"></main>
+
+<section class="ranking" id="ranking">
+  <div class="ranking-inner">
+    <p class="section-eyebrow">종합 비교</p>
+    <h2 class="section-title">4개 사업지 랭킹</h2>
+    <p class="section-sub">열 헤더를 클릭하면 해당 항목 기준으로 재정렬됩니다</p>
+    <div class="ranking-table-wrap">
+      <table class="ranking-table" id="ranking-table">
+        <thead>
+          <tr id="ranking-head-row" class="feature-row"></tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<footer class="site-footer footer">
+  <p>새사주 신축매입약정 사업지 스코어보드 · 데이터 기준일은 각 사업지 담당자 협의 결과에 따라 갱신됩니다.</p>
+</footer>
+
+<!-- Constitution IV: GSAP ScrollTrigger is the one and only external library permitted -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="js/main.js"></script>
+</body>
+</html>

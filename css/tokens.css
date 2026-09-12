@@ -1,0 +1,173 @@
+/* ===================================================================
+   tokens.css — 생성 출처: DESIGN.md (root). 색·간격·라운드·타이포 값은
+   DESIGN.md 그대로이며, 예외는 딱 두 가지뿐이다 (Constitution III):
+
+   1) 폰트: GT Walsheim → Pretendard 700(디스플레이) / Pretendard 400(본문),
+      폴백 Inter. (GT Walsheim은 한글이 없고 자유 배포도 안 됨)
+   2) 한글 디스플레이 자간: 문서 원래 값(px 고정, 예: -5.5px/-4.25px/-3.1px)
+      대신 크기의 -3%(-0.03em)로 통일. 한글은 라틴만큼 강하게 좁힐 수 없어
+      원래 비율(약 -5%)대로 두면 글자가 뭉개진다.
+
+   그 외 모든 색상/간격/라운드/타이포 크기·굵기·행간 값은 DESIGN.md 수치를
+   그대로 옮긴 것이다. 등급(A/B/C/D) 구분은 색이 아니라 surface lift + pill
+   배지로 하며, 유채색은 accent-blue와 A등급 카드의 gradient-spotlight-card
+   하나뿐이다 — 그래서 이 파일에는 grade별 hue 토큰이 없다.
+   =================================================================== */
+
+:root{
+  /* ---- Colors — DESIGN.md `colors:` 그대로 ---- */
+  --primary: #ffffff;
+  --on-primary: #000000;
+  --accent-blue: #0099ff;
+  --ink: #ffffff;
+  --ink-muted: #999999;
+  --canvas: #090909;
+  --surface-1: #141414;
+  --surface-2: #1c1c1c;
+  --hairline: #262626;
+  --hairline-soft: #1a1a1a;
+  --inverse-canvas: #ffffff;
+  --inverse-ink: #000000;
+  --gradient-magenta: #d44df0;
+  --gradient-violet: #6a4cf5;
+  --gradient-orange: #ff7a3d;
+  --gradient-coral: #ff5577;
+  --semantic-success: #22c55e;
+
+  /* ---- Legacy aliases (기존 컴포넌트 CSS 호환용, 값은 위 토큰을 그대로 가리킴) ---- */
+  --bg: var(--canvas);
+  --bg-alt: var(--surface-1);
+  --panel: rgba(20,20,20,0.72); /* surface-1의 반투명 유리 패널 변형 */
+  --panel-border: var(--hairline);
+  --text: var(--ink);
+  --text-faint: var(--ink-muted);
+  /* 주의: ink/ink-muted 외 제3의 회색조를 만들지 않는다 (DESIGN.md Don't).
+     예전 --text-dim(#b8b8b8)은 제거하고 ink-muted로 통합했다. */
+
+  /* ---- Radius — DESIGN.md `rounded:` 그대로 ---- */
+  --rounded-xs: 4px;
+  --rounded-sm: 6px;
+  --rounded-md: 10px;
+  --rounded-lg: 15px;
+  --rounded-xl: 20px;
+  --rounded-xxl: 30px;
+  --rounded-pill: 100px;
+  --rounded-full: 9999px;
+  /* legacy aliases */
+  --radius-lg: var(--rounded-xl);
+  --radius-md: var(--rounded-md);
+  --radius-sm: var(--rounded-sm);
+
+  /* ---- Spacing — DESIGN.md `spacing:` 그대로 ---- */
+  --space-hair: 1px;
+  --space-xxs: 4px;
+  --space-xs: 8px;
+  --space-sm: 12px;
+  --space-md: 15px;
+  --space-lg: 20px;
+  --space-xl: 30px;
+  --space-xxl: 40px;
+  --space-section: 96px;
+
+  /* ---- Typography — 크기/굵기/행간은 DESIGN.md `typography:` 그대로.
+     예외 1) fontFamily: Pretendard(본문 400/디스플레이 700), 폴백 Inter.
+     예외 2) display 4단계의 letterSpacing: 전부 -0.03em(한글 -3% 규칙).
+     display 굵기는 Pretendard 700을 쓰라는 지시에 맞춰 500→700으로 조정
+     (GT Walsheim Medium=500 자리를 Pretendard Bold=700이 대신함). ---- */
+  --font-display: "Pretendard", "Inter", -apple-system, BlinkMacSystemFont, "Malgun Gothic", sans-serif;
+  --font-body: "Pretendard", "Inter", -apple-system, BlinkMacSystemFont, "Malgun Gothic", sans-serif;
+
+  --display-xxl-size: 110px; --display-xxl-weight: 700; --display-xxl-lh: 0.85; --display-xxl-ls: -0.03em;
+  --display-xl-size: 85px;   --display-xl-weight: 700;  --display-xl-lh: 0.95;  --display-xl-ls: -0.03em;
+  --display-lg-size: 62px;   --display-lg-weight: 700;  --display-lg-lh: 1.00;  --display-lg-ls: -0.03em;
+  --display-md-size: 32px;   --display-md-weight: 700;  --display-md-lh: 1.13;  --display-md-ls: -0.03em;
+  --headline-size: 22px;     --headline-weight: 700;    --headline-lh: 1.20;    --headline-ls: -0.036em;
+  --subhead-size: 24px;      --subhead-weight: 400;     --subhead-lh: 1.30;     --subhead-ls: -0.0004em;
+  --body-lg-size: 18px;      --body-lg-weight: 400;     --body-lg-lh: 1.30;     --body-lg-ls: -0.01em;
+  --body-size: 15px;         --body-weight: 400;        --body-lh: 1.30;       --body-ls: -0.01em;
+  --body-sm-size: 14px;      --body-sm-weight: 500;     --body-sm-lh: 1.40;    --body-sm-ls: -0.01em;
+  --caption-size: 13px;      --caption-weight: 500;     --caption-lh: 1.20;    --caption-ls: -0.01em;
+  --micro-size: 12px;        --micro-weight: 400;       --micro-lh: 1.20;      --micro-ls: -0.01em;
+  --button-size: 14px;       --button-weight: 500;      --button-lh: 1.0;      --button-ls: -0.01em;
+
+  /* ---- Motion easing ---- */
+  --ease: cubic-bezier(.22,.68,0,1);
+
+  /* ---- Layout ---- */
+  --nav-height: 60px;
+
+  /* ---- Motion durations/params — GSAP ScrollTrigger pin+scrub, SVG gauge
+     (Constitution IV, V; DESIGN.md에 없는 이 프로젝트 고유 모션값) ---- */
+  --scroll-pin-vh: 100vh;
+  --zoom-scale-from: 1.15;
+  --zoom-scale-to: 1.0;
+  --gauge-duration: .9s;
+  --total-count-duration: .9s;
+  --reveal-duration: .7s;
+  --reveal-translate: 28px;
+  --reveal-stagger: .08s;
+  --mobile-fade-duration: .6s;
+
+  font-size: 16px;
+}
+
+/* ===================================================================
+   Component token assignments — DESIGN.md `components:` 블록 중 이
+   페이지에 정직한 구조적 대응이 있는 것만 (top-nav, footer, pricing-card,
+   feature-row, comparison-row). 레이아웃은 style.css에 둔다.
+   =================================================================== */
+
+.top-nav{
+  background: var(--canvas);
+  color: var(--ink);
+}
+
+.footer{
+  background: var(--canvas);
+  color: var(--ink-muted);
+  font-size: var(--caption-size);
+  font-weight: var(--caption-weight);
+  padding: 64px 32px;
+}
+
+.pricing-card{
+  background: var(--surface-1);
+  color: var(--ink);
+  border-radius: var(--rounded-xl);
+  padding: 24px;
+}
+
+.feature-row{
+  background: var(--canvas);
+  color: var(--ink);
+  border-radius: var(--rounded-xs);
+}
+
+.comparison-row{
+  background: var(--canvas);
+  color: var(--ink-muted);
+  font-size: var(--body-sm-size);
+  border-radius: var(--rounded-xs);
+}
+
+/* gradient-spotlight-card / product-mockup-tile — DESIGN.md `components:` 값 그대로.
+   실제 화면에서는 더 구체적인 규칙(style.css의 .grade-badge.grade-a-color,
+   .score-card 등)이 나중에 로드되어 배경/패딩/글꼴 크기를 덮어쓰므로, 이 두 클래스는
+   "DESIGN.md 컴포넌트 이름을 요소에 그대로 부여한다"는 Constitution III 요구를 만족시키는
+   정체성 표식이다(기존 .pricing-card/.feature-row와 같은 패턴). */
+.gradient-spotlight-card{
+  background: var(--gradient-violet);
+  color: var(--ink);
+  font-size: var(--subhead-size);
+  font-weight: var(--subhead-weight);
+  border-radius: var(--rounded-xl);
+  padding: 32px;
+}
+
+.product-mockup-tile{
+  background: var(--surface-1);
+  color: var(--ink);
+  font-size: var(--body-sm-size);
+  border-radius: var(--rounded-xl);
+  padding: 16px;
+}
