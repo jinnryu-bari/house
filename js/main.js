@@ -369,6 +369,7 @@
         gsap.set(sceneEls.slice(1), { yPercent: 100 });
 
         sceneEls.forEach((el, i) => {
+          const isLast = i === sceneEls.length - 1;
           const bg = el.querySelector(".scene-bg");
           const tl = gsap.timeline({
             scrollTrigger: {
@@ -377,7 +378,17 @@
               end: "+=100%",
               scrub: true,
               pin: true,
-              pinSpacing: false
+              // pinSpacing:false는 "다음 씬의 100vh 자연 공간을 빌려서" pin이
+              // 필요로 하는 +=100% 스크롤 구간을 확보하는 방식이다 — 씬 0~2는
+              // 바로 다음에 진짜 100vh짜리 씬이 있어 문제없다. 하지만 마지막
+              // 씬(부평, index 3) 뒤에는 씬이 없고 #ranking(4행짜리 비교 표)만
+              // 있는데, 이 섹션의 실제 렌더 높이가 100vh보다 작으면 빌려올 공간이
+              // 부족해 ScrollTrigger가 end를 문서 끝에 맞춰 강제로 줄여버린다.
+              // 그 결과 마지막 씬의 pin+zoom이 거의 즉시 끝나 버려 "부평이 안
+              // 보이고 바로 비교 표로 넘어가는" 것처럼 보인다. 마지막 씬만
+              // pinSpacing:true로 되돌려 GSAP이 실제 스페이서를 삽입해 +=100%
+              // 구간을 항상 확보하도록 한다.
+              pinSpacing: isLast ? true : false
             }
           });
           tl.fromTo(bg, { scale: 1.15 }, { scale: 1, ease: "none" }, 0);
@@ -387,6 +398,13 @@
         });
       }
     });
+
+    console.log(
+      `[ScrollTrigger] total=${ScrollTrigger.getAll().length} ` +
+      `(scenes=${sceneEls.length} → 게이지 onEnter 트리거 ${sceneEls.length}개 + ` +
+      `데스크톱 pin 트리거 ${sceneEls.length}개 = ${sceneEls.length * 2}개 예상, ` +
+      `모바일/reduced-motion 폭에서는 게이지 onEnter ${sceneEls.length}개만)`
+    );
   }
 
   function activateScene(el, animate) {
